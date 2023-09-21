@@ -2,3 +2,26 @@ body {
     background-color: #ffc09f;
     font-family: 'Teko', sans-serif;
 }
+
+.headerMain {
+    background-color: #000;
+    color: #FFF;
+    padding: 1rem;
+}
+
+.headerMain .logo {
+    font-size: 2rem;
+}
+
+.mainContent {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.footerMain {
+    background-color: #000;
+    color: #FFF;
+    padding: 1rem;
+}
