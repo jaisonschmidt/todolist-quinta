@@ -1,6 +1,15 @@
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
 body {
     background-color: #ffc09f;
+    display: flex;
+    flex-direction: column;
     font-family: 'Teko', sans-serif;
+    height: 100%;
+    margin: 0;
 }
 
 .headerMain {
