@@ -21,7 +21,36 @@
     </header>
 
     <main class="mainContent">
-        conteúdo
+        <!-- formulario -->
+        <div class="formAddTaskContainer">
+            <form class="form-vertical" id="frmTask" autocomplete="off">
+                <label for="txtTaskTitle">Título da Task:</label>
+                <input 
+                    type="text" 
+                    name="txtTaskTitle" 
+                    id="txtTaskTitle" 
+                    placeholder="Adicione o título da task" 
+                    minlength="5" 
+                    maxlength="60" 
+                    required 
+                    autofocus
+                >
+
+                <label for="txtTaskDescription">Descrição da Task</label>
+                <input type="text" name="txtTaskDescription" id="txtTaskDescription" placeholder="Insira uma descrição" maxlength="80">
+                
+                <input type="hidden" name="action" value="NEW_TASK" id="frmAction">
+                <input type="hidden" name="frmTaskId" value="" id="frmTaskId">
+
+                <div class="m-t-1">
+                    <button type="submit" class="btn">
+                        Cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- tasks -->
     </main>
 
     <footer class="footerMain">

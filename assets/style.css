@@ -12,6 +12,40 @@ body {
     margin: 0;
 }
 
+/* utility classes */
+.btn {
+    background-color: #A0CED9;
+    border: 1px solid #000;
+    border-radius: 0.2rem;
+    margin-top: 0.4rem;
+    padding: 0.6rem;
+}
+
+.btn-info {
+    background-color: beige;
+}
+
+.d-block {
+    display: block;
+}
+
+.m-t-1 {
+    margin-top: 1rem;
+}
+
+.form-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-vertical label {
+    margin: 1rem 0 0.5rem 0;
+}
+
+.form-vertical input {
+    padding: 1rem;
+}
+
 .headerMain {
     background-color: #000;
     color: #FFF;
@@ -27,6 +61,14 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+}
+
+.formAddTaskContainer {
+    background-color: #FFF;
+    margin-top: 2rem;
+    max-width: 840px;
+    padding: 2rem;
+    width: 100%;
 }
 
 .footerMain {
