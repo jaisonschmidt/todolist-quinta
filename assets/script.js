@@ -22,6 +22,17 @@ function createTask(taskTitle, taskDescription = "") {
     return task;
 }
 
+function getIndexByTaskId(taskId) {
+    return tasks.findIndex((task) => task.id == taskId);
+}
+
+function deleteTask(taskId) {
+    const taskIndex = getIndexByTaskId(taskId);
+    tasks.splice(taskIndex, 1);
+
+    renderTasks();
+}
+
 function renderTasks(listElement = taskListElement, emptyMessage = emptyTaskListElement) {
     let finalHtml = "";
 
