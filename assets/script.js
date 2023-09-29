@@ -1,11 +1,30 @@
+/**
+ * TODOs
+ * - Implementar persistência via local storage
+ * - Implementar JSDOC
+ */
+
 const tasks = [];
 const taskListElement = document.getElementById("taskListElement");
 const emptyTaskListElement = document.getElementById("emptyTaskListElement");
 const frmTask = document.getElementById('frmTask');
 
 function newId() {
-    // Gerar IDs entre 0 e 999
-    return Math.floor(Math.random() * 1000); 
+    return Math.floor(Math.random() * 1000); // Gerar IDs entre 0 e 999
+}
+
+function getTasks() {
+    return tasks;
+}
+
+function getTaskById(taskId) {
+    const taskIndex = getIndexByTaskId(taskId);
+    
+    return tasks[taskIndex] || undefined;
+}
+
+function getIndexByTaskId(taskId) {
+    return tasks.findIndex((task) => task.id == taskId);
 }
 
 function createTask(taskTitle, taskDescription = "") {
@@ -13,17 +32,15 @@ function createTask(taskTitle, taskDescription = "") {
     
     let task = {
         id,
-        taskTitle: taskTitle,
-        taskDescription: taskDescription,
+        taskTitle,
+        taskDescription,
     }
 
     tasks.push(task);
-    renderTasks();
-    return task;
-}
 
-function getIndexByTaskId(taskId) {
-    return tasks.findIndex((task) => task.id == taskId);
+    renderTasks();
+
+    return task;
 }
 
 function deleteTask(taskId) {
@@ -31,6 +48,42 @@ function deleteTask(taskId) {
     tasks.splice(taskIndex, 1);
 
     renderTasks();
+}
+
+function updateTask(task = {}) {
+    try {
+        const taskIndex = getIndexByTaskId(task.id);
+
+        tasks[taskIndex] = {
+            ...tasks[taskIndex],
+            ...task,
+        };
+
+        // reseta o campo
+        frmTask.frmAction.value = 'NEW_TASK';
+        renderTasks();
+        return tasks[taskIndex];
+    } catch (e) {
+        console.log(e);
+        return undefined;
+    }
+}
+
+function renderFormUpdate(taskId = -1) {
+    try {
+        const taskIndex = getIndexByTaskId(taskId);
+        const task = tasks[taskIndex];
+
+        frmTask.frmTaskId.value = task.id;
+        frmTask.txtTaskTitle.value = task.taskTitle;
+        frmTask.txtTaskDescription.value = task.taskDescription;
+        frmTask.frmAction.value = 'UPDATE_TASK';
+
+        frmTask.txtTaskTitle.focus();
+    } catch (e) {
+        console.log(e);
+        alert("Erro ao editar task");
+    }
 }
 
 function renderTasks(listElement = taskListElement, emptyMessage = emptyTaskListElement) {
@@ -67,15 +120,25 @@ function renderTasks(listElement = taskListElement, emptyMessage = emptyTaskList
             </details>
         `;
     });
-
-    console.log("final html", finalHtml);
    
     listElement.innerHTML = finalHtml;
 }
 
 frmTask.addEventListener('submit', function(event) {
     event.preventDefault();
-    createTask(frmTask.txtTaskTitle.value, frmTask.txtTaskDescription.value);
+
+    if(frmTask.frmAction.value === "NEW_TASK") {
+        createTask(frmTask.txtTaskTitle.value, frmTask.txtTaskDescription.value);
+        frmTask.reset();
+        return;
+    }
+
+    updateTask({
+        id: frmTask.frmTaskId.value, 
+        taskTitle: frmTask.txtTaskTitle.value, 
+        taskDescription: frmTask.txtTaskDescription.value
+    });
+
     frmTask.reset();
 })
 
